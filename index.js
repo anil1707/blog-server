@@ -5,13 +5,14 @@ const connectDB = require("./db");
 const cookieParser = require('cookie-parser');
 const { postRouter } = require("./router/postRoute");
 const app = express();
+let dotenv = require('dotenv')
+dotenv.config()
 app.use(express.json());
 app.use(cookieParser())
 app.use('/uploads', express.static(__dirname+'/uploads'))
 connectDB();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.get("/", (req, res) => {
-  console.log("hello");
   res.send({ result: "hello" });
 });
 
