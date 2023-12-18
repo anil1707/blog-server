@@ -7,7 +7,7 @@ const { postRouter } = require("./router/postRoute");
 const app = express();
 let dotenv = require("dotenv");
 dotenv.config();
-app.use(cors({ credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -16,8 +16,6 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware to set CORS headers
 app.use((req, res, next) => {
-  // Allow requests from any origin (you can replace '*' with a specific origin)
-  res.header('Access-Control-Allow-Origin', '*');
 
   // Allow the following HTTP methods
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -32,7 +30,7 @@ app.use((req, res, next) => {
   next();
 });
 app.get("/", (req, res) => {
-  res.send({ result: "hello" });
+  res.send({ result: "Server is running..." });
 });
 
 app.use("/user", userRoute);

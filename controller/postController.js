@@ -37,4 +37,11 @@ const viewOnePostController = async (req,res) =>{
 
 }
 
-module.exports = { createPostController, getAllPostController, viewOnePostController };
+const deletePostController = async (req, res)=>{
+  let data = await post.deleteOne({_id:req.params.id})
+  if(data?.acknowledged === true){
+    res.send({message:"Deleted Succussfully!"})
+  }
+}
+
+module.exports = { createPostController, getAllPostController, viewOnePostController, deletePostController };
