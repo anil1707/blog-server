@@ -64,7 +64,7 @@ let profileController = (req, res)=>{
   let {token} = req.cookies;
   console.log("token profile", token);
   if(token)
-  jwt.verify(token, JWT_SECRET_KEY, {}, (err, info)=>{
+    jwt.verify(token, JWT_SECRET_KEY, {}, (err, info)=>{
     if(err) throw err
     res.json({email:info.email})
   })
