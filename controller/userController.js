@@ -24,8 +24,14 @@ const loginController = async (req, res) => {
             {},
             (err, token) => {
               if (err) throw err;
+              console.log(token);
               res
-                .cookie("token", token)
+                .cookie("token", token, {
+                  maxAge: 900000,
+                  httpOnly: true,
+                  domain: "https://blog-backend-i14c.onrender.com",
+                  path: "/",
+                })
                 .json({ message: "Logged in successfully!" });
             }
           );
