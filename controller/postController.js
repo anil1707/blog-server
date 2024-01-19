@@ -35,7 +35,6 @@ const createPostController = (req, res) => {
             });
             collection.save();
           }
-          console.log(extractCategory);
           let data = {
             title: req.body.title,
             summary: req.body.summary,
@@ -51,13 +50,17 @@ const createPostController = (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      res.send({ Error: err });
     });
 };
 
 const getAllPostController = async (req, res) => {
-  let posts = await post.find();
-  res.send({ posts });
+  try {
+    let posts = await post.find();
+    res.send({ posts });
+  } catch (error) {
+    res.send({ Error: error });
+  }
 };
 
 const getCategoryController = async (req, res) => {
@@ -65,23 +68,21 @@ const getCategoryController = async (req, res) => {
     let category = await categoryModel.find();
     res.send({ category });
   } catch (error) {
-    console.log("Error: anil");
+    res.send({ Erorr: error });
   }
 };
 
 const viewOnePostController = async (req, res) => {
-  let data = await post.findById(req.params.id);
-  res.send(data);
+  try {
+    let data = await post.findById(req.params.id);
+    res.send(data);
+  } catch (error) {
+    res.send({ Error: error });
+  }
 };
 
 const editPostController = async (req, res) => {
-  // let newPath = null;
   if (req.file) {
-    // let { originalname, path } = req.file;
-    // let parts = originalname.split(".");
-    // let extension = parts[parts.length - 1];
-    // newPath = path + "." + extension;
-    // fs.renameSync(path, newPath);
     const b64 = Buffer.from(req.file.buffer).toString("base64");
     let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
     handleUpload(dataURI).then((cldres) => {
@@ -92,7 +93,7 @@ const editPostController = async (req, res) => {
         if (info.email !== postDoc.author) {
           return res.status(400).json({ message: "invalid author" });
         }
-        let result = await post.updateOne(
+        await post.updateOne(
           { _id: req.params.id },
           {
             $set: {
@@ -131,11 +132,15 @@ const editPostController = async (req, res) => {
 };
 
 const deletePostController = async (req, res) => {
-  let data = await post.deleteOne({ _id: req.params.id });
-  if (data?.acknowledged === true) {
-    res.send({ message: "Deleted Succussfully!" });
-  } else {
-    res.send({ message: "Something went wrong" });
+  try {
+    let data = await post.deleteOne({ _id: req.params.id });
+    if (data?.acknowledged === true) {
+      res.send({ message: "Deleted Succussfully!" });
+    } else {
+      res.send({ message: "Something went wrong" });
+    }
+  } catch (error) {
+    res.send({Error:error})
   }
 };
 
