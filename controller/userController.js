@@ -29,8 +29,8 @@ const loginController = async (req, res) => {
                 .cookie("token", token, {
                   maxAge: 900000,
                   httpOnly: true,
-                  domain: "https://blog-backend-i14c.onrender.com",
-                  path: "/",
+                  sameSite: "None",
+                  secure: true,
                 })
                 .json({ message: "Logged in successfully!" });
             }
