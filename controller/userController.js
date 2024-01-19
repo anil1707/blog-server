@@ -94,7 +94,12 @@ let profileController = (req, res) => {
 
 let logoutController = (req, res) => {
   try {
-    res.cookie("token", "");
+    res.cookie("token", "", {
+      maxAge: 900000,
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
     res.send(req.cookies);
   } catch (error) {
     res.send({ Error: error });
