@@ -6,7 +6,8 @@ let postSchema = mongoose.Schema({
   category: String,
   content: String,
   cover: String,
-  author:String
+  author:String,
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }]
 }, {
     timestamps:true
 });
