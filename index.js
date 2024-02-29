@@ -24,7 +24,12 @@ const io = socketIO(server);
 //     console.log("User disconnected");
 //   });
 // });
-app.use(cors({ credentials: true }));
+app.use(
+  cors({
+    origin: "https://deploy-preview-4--exquisite-mousse-a08a25.netlify.app/",
+    credentials: true,
+  })
+);
 // app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
