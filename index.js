@@ -26,7 +26,7 @@ const io = socketIO(server);
 // });
 app.use(
   cors({
-    origin: "https://deploy-preview-4--exquisite-mousse-a08a25.netlify.app/",
+    origin: "https://deploy-preview-4--exquisite-mousse-a08a25.netlify.app",
     credentials: true,
   })
 );

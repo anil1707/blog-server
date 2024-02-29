@@ -26,7 +26,7 @@ const loginController = async (req, res) => {
               if (err) throw err;
               res
                 .cookie("token", token, {
-                  domain: "https://deploy-preview-4--exquisite-mousse-a08a25.netlify.app/", // or 'localhost' during development
+                  domain: "https://deploy-preview-4--exquisite-mousse-a08a25.netlify.app", // or 'localhost' during development
                   path: "/",
                   secure: true, // only set this to true if using HTTPS
                   httpOnly: true, // recommended for security
