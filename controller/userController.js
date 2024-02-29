@@ -26,10 +26,11 @@ const loginController = async (req, res) => {
               if (err) throw err;
               res
                 .cookie("token", token, {
-                  maxAge: 900000,
-                  httpOnly: true,
-                  sameSite: "None",
-                  secure: true,
+                  domain: "https://deploy-preview-4--exquisite-mousse-a08a25.netlify.app/", // or 'localhost' during development
+                  path: "/",
+                  secure: true, // only set this to true if using HTTPS
+                  httpOnly: true, // recommended for security
+                  sameSite: "None", // required for cross-origin requests
                 })
                 .json({ message: "Logged in successfully!" });
             }
@@ -98,7 +99,7 @@ let profileController = async (req, res) => {
           firstName: userDetail.firstName,
           lastName: userDetail.lastName,
           logo: userDetail.pic,
-          userId: userDetail._id
+          userId: userDetail._id,
         },
       });
     }
