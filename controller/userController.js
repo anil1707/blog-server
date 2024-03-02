@@ -21,18 +21,10 @@ const loginController = async (req, res) => {
           jwt.sign(
             { email, password: pass },
             JWT_SECRET_KEY,
-            { expiresIn: "1h" },
+            { expiresIn: "1d" },
             (err, token) => {
               if (err) throw err;
-              res
-                .cookie("token", token, {
-                  domain: ".netlify.app", // or 'localhost' during development
-                  path: "/",
-                  secure: true, // only set this to true if using HTTPS
-                  httpOnly: true, // recommended for security
-                  sameSite: "None", // required for cross-origin requests
-                })
-                .json({ message: "Logged in successfully!" });
+              res.json({ token, message: "Logged in successfully!" });
             }
           );
         } else {

@@ -20,7 +20,7 @@ const handleUpload = (file) => {
 };
 
 const uploadPhotoController = (req, res) => {
-  const b64 = Buffer.from(req.file.buffer).toString("base64");
+  const b64 = Buffer.from(req.file?.buffer).toString("base64");
   let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
   try {
     handleUpload(dataURI).then((cldres) => {
@@ -31,7 +31,7 @@ const uploadPhotoController = (req, res) => {
       }
     });
   } catch (error) {
-    console.log(error);
+    console.log("Upload photo page error", error);
   }
 };
 const createPostController = async (req, res) => {
@@ -129,7 +129,6 @@ const deletePostController = async (req, res) => {
 };
 
 const addCommentController = async (req, res) => {
-  const token = req.cookies.token;
 
   // userInfo is set from auth middleware
   const info = req.userInfo;
