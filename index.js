@@ -26,10 +26,12 @@ const io = socketIO(server);
 // });
 app.use(
   cors({
-    origin: "https://deploy-preview-4--exquisite-mousse-a08a25.netlify.app",
+    origin: "https://exquisite-mousse-a08a25.netlify.app",
     credentials: true,
   })
 );
+// https://exquisite-mousse-a08a25.netlify.app/
+https://exquisite-mousse-a08a25.netlify.app/
 // app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
