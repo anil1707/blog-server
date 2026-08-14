@@ -26,7 +26,7 @@ const io = socketIO(server);
 // });
 app.use(
   cors({
-    origin: "https://calm-vacherin-91e18d.netlify.app/",
+    origin: "https://calm-vacherin-91e18d.netlify.app",
     credentials: true,
   })
 );
